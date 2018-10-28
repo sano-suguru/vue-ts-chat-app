@@ -9,6 +9,7 @@
 </template>
 
 <script lang="ts">
+import firebase from 'firebase';
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
 import AuthButton from './components/AuthButton.vue';
@@ -25,7 +26,7 @@ import { User, Content } from './classes';
   },
 })
 export default class App extends Vue {
-  private user = new User('testuser');
+  private user = new User();
   private contents: Content[] = [
     // ダミーコンテンツ
     new Content('1', 'testuser1', 'https://avatars3.githubusercontent.com/u/43309177?s=400&v=4', 'Hello!\nnewline'),
@@ -33,14 +34,19 @@ export default class App extends Vue {
   ];
   private input = '';
 
+  private created() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.user = new User(user ? user.displayName! : '');
+    });
+  }
+
   private doLogin() {
-    // ログアウト処理を実装する
-    alert('Login!');
+    const provider = new firebase.auth.TwitterAuthProvider();
+    firebase.auth().signInWithPopup(provider);
   }
 
   private doLogout(): void {
-    // ログイン処理を実装する
-    alert('logout');
+    firebase.auth().signOut();
   }
 
   private textChanged(text: string): void {
