@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user" key="login">
+  <div v-if="user.name" key="login">
     [{{ user.name }}]
     <button type="button" @click="doLogout">
       ログアウト
