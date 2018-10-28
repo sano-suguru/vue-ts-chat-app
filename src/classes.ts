@@ -1,6 +1,6 @@
 class User {
   constructor(
-    public name: string = '',
+    public displayName: string = '',
   ) {}
 }
 
