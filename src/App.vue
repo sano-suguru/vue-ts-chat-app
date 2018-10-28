@@ -28,7 +28,7 @@ export default class App extends Vue {
   private contents: Content[] = [
     // ダミーコンテンツ
     new Content('1', 'testuser1', 'https://avatars3.githubusercontent.com/u/43309177?s=400&v=4', 'Hello!\nnewline'),
-    new Content('2', 'testuser2', 'https://avatars3.githubusercontent.com/u/25644?s=400&v=4', 'Nice!\nnewline'),
+    new Content('2', 'testuser2', 'https://avatars1.githubusercontent.com/u/774501?s=200&v=4', 'Nice!\nnewline'),
   ];
 
   private doLogin() {
