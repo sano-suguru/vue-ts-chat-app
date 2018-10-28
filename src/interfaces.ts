@@ -1,5 +1,7 @@
-interface User {
-  name: string;
+class User {
+  constructor(
+    public name: string,
+  ) {}
 }
 
 export { User };
