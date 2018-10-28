@@ -18,8 +18,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { Content } from '../classes';
 import { VueConstructor } from 'vue';
-// tslint:disable-next-line:no-var-requires
-const Nl2br = require('vue-nl2br') as VueConstructor;
+import Nl2br from 'vue-nl2br';
 
 @Component({components: { Nl2br }})
 export default class ContentList extends Vue {
