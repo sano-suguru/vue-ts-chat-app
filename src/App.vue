@@ -37,6 +37,13 @@ export default class App extends Vue {
   private created() {
     firebase.auth().onAuthStateChanged(user => {
       this.user = new User(user ? user.displayName! : '');
+      const refMessage = firebase.database().ref('message');
+      if (user) {
+        this.contents = [];
+        refMessage.limitToLast(10).on('child_added', this.childAdded);
+      } else {
+        refMessage.limitToLast(10).off('child_added', this.childAdded);
+      }
     });
   }
 
@@ -59,6 +66,17 @@ export default class App extends Vue {
       user: this.user,
       input: this.input,
     }));
+  }
+
+  private childAdded(snap: firebase.database.DataSnapshot | null) {
+    if (!snap) { return; }
+    const val = snap.val() as Content;
+    this.contents.push({
+      key:  snap.key!,
+      name: val.name,
+      image: val.image,
+      message: val.message,
+    });
   }
 }
 </script>
